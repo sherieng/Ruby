@@ -1,0 +1,60 @@
+<%= content_for :left_column do %>
+<h3 class="my-3 bg-light p-3 rounded text-secondary">Current Users</h3>
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th scope ="col">First Name</th>
+            <th scope ="col">Last Name</th>
+            <th scope ="col">Favorite Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.each do |user| %>
+            <tr>
+                <td><%= user.first_name %></td>
+                <td ><%= user.last_name %></td>
+                <td><%= user.fav_lang %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+
+<%= content_for :right_column do %>
+<h3 class="my-3 bg-light p-3 rounded text-secondary">New Users</h3>
+<form action= '/users' method ='POST'>
+    <input name = "authenticity_token" value = "<%=form_authenticity_token%>" type = "hidden">
+    <div class= "row justify-content-center "> 
+        <% if flash[:error] %>
+            <b>Please correct errors:  </b>
+            <% flash[:error].each do |error| %>
+                <p class= "mx-2"><%=error%> </p>
+            <% end %>
+        <% elsif flash[:success] %>
+            <%= flash[:success] %>
+        <% end %>    
+    </div>
+    <div class="form-group">
+        <label for="name">First Name: </label>
+        <input type='text' name='user[first_name]' class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="name">Last Name: </label>
+        <input type='text' name='user[last_name]' class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="name">Favorite Language: </label>
+        <input type='text' name='user[fav_lang]' class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary mb-2">
+    </div>
+    <div class="row justify-content-end mr-1 ">
+        <b><a href="/posts" class="text-dark">All Posts</a></b>
+    </div>
+</form>
+<% end %>
+
+</body>
+</html>

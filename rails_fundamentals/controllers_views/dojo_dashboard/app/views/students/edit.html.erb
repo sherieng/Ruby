@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>New Student</title>
+</head>
+<body>
+    <div class= "container border m-5"> 
+        <h1 class = "text-center m-5 bg-primary text-white p-3" >Edit a Student</h1>
+            <form action= '/dojos/<%=@student.dojo_id%>/students/<%=@student.id%>' method ='POST'>
+                <input type ="hidden" name="_method" value="patch">
+                <input name = "authenticity_token" value = "<%=form_authenticity_token%>" type = "hidden">
+                <div class = "container">
+                    <div class= "row justify-content-center "> 
+                        <% if flash[:error] %>
+                            <b>Please correct errors:  </b>
+                            <% flash[:error].each do |error| %>
+                                <p class= "mx-2"><%=error%> </p><p>
+                            <% end %>
+                        <% elsif flash[:success] %>
+                            <%= flash[:success] %>
+                        <% end %>    
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">First Name: </label>
+                        <div class="col-3">
+                            <input type='text' name='student[first_name]' value=<%=@student.first_name%>>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">Last Name: </label>
+                        <div class="col-3">
+                            <input type='text' name='student[last_name]' value=<%=@student.last_name%>>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">Email: </label>
+                        <div class="col-3">
+                            <input type='text' name='student[email]' value=<%=@student.email%>>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">Dojo: </label>
+                        <div class="col-3">
+                            <select name ="student[dojo_id]" value=<%=@student.dojo_id%>>
+                            <% @dojos.each do |dojo| %>
+                                <% if dojo == @dojo %>
+                                    <option selected value= "<%=dojo.id%>"><%=dojo.branch%></option>
+                                <%else%>
+                                    <option value = "<%=dojo.id%>"><%=dojo.branch%></option>
+                                <%end%>
+                            <%end%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row mt-5 mb-5 d-flex justify-content-center">
+                        <input type="submit" value="Update" class="btn btn-primary mb-2">
+                    </div>
+                    <div class="row justify-content-end mr-1 mb-2 ">
+                        <b><a href="/dojos" class="text-dark col">Go Home </a></b>
+                        <b><a href="/dojos/<%= @dojo.id %>/students/<%= @student.id %>" class="text-dark mr-1 col"> Show </a></b>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

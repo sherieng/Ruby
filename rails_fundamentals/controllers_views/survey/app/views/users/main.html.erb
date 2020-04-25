@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Survey Form</title>
+</head>
+<body>
+    <div class= "container border m-5"> 
+        <h1 class = "text-center m-5 bg-primary text-white p-3" >Survey Form</h1>
+        <div class="container">
+             <form action= '/create' method ='POST'>
+                <input name = "authenticity_token" value = "<% form_authenticity_token%>" type = "hidden">
+                <div class = "container">
+                    <div class= "row justify-content-center"> 
+                        <%= flash[:success] %>
+                        <%= flash[:error] %> 
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">Name: </label>
+                        <div class="col-3">
+                            <input type='text' name='user[name]'>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="dojo" class ="col-2">Dojo Location: </label>
+                        <div class="col-3">
+                            <%= select(:user, :dojo, [['Dallas', 'Dallas'], ['Los Angeles', 'Los Angeles'], ['Seattle', 'Seattle']]) %>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="lang" class ="col-2">Favorite Language: </label>
+                        <div class="col-3">
+                            <%= select(:user, :lang, [['Python', 'Python'], ['Ruby', 'Ruby'], ['Javascript', 'Javascript']]) %>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="lang" class ="col-2">Comments: </label>
+                        <div class="col-3">
+                            <input type="text" name="user[comment]" rows="3">
+                        </div>
+                    </div>
+                    <div class="form-row mt-5 mb-5 d-flex justify-content-center">
+                        <input type="submit" value="Add" class="btn btn-primary mb-2">
+                    </div> 
+                </div>
+            </form
+        </div>
+    </div>
+</body>
+</html>
+

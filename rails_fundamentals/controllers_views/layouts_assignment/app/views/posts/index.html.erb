@@ -1,0 +1,68 @@
+<%= content_for :left_column do %>
+<h3 class="my-3 bg-light p-3 rounded text-secondary">All Posts</h3>
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th scope ="col">Title</th>
+            <th scope ="col">Content</th>
+            <th scope ="col">User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @post.each do |post| %>
+            <tr>
+                <td><%=post.title %></td>
+                <td ><%=post.content %></td>
+                <td><%=post.user.first_name %> <%=post.user.last_name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+
+<%= content_for :middle_column do %>
+<h3 class="my-3 bg-light p-3 rounded text-secondary">New Post</h3>
+<form action= '/posts' method ='POST'>
+    <input name = "authenticity_token" value = "<%=form_authenticity_token%>" type = "hidden">
+    <div class= "row justify-content-center "> 
+        <% if flash[:error] %>
+            <b>Please correct errors:  </b>
+            <% flash[:error].each do |error| %>
+                <p class= "mx-2"><%=error%> </p>
+            <% end %>
+        <% elsif flash[:success] %>
+            <%= flash[:success] %>
+        <% end %>    
+    </div>
+    <div class="form-group">
+        <label for="name">Title: </label>
+        <input type='text' name='post[title]' class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="name">Content: </label>
+        <input type='text' name='post[content]' class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="name">User: </label>
+        <select class="form-control" name ="post[user_id]">
+        <% @user.each do |user| %>
+            <option value = "<%=user.id%>"><%=user.first_name%> <%=user.last_name%></option>
+        <%end%>
+        </select>
+    </div>    
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary mb-2">
+    </div>
+</form>
+<% end %>
+
+<%= content_for :right_column do %>
+<h3 class="my-3 bg-light p-3 rounded text-secondary">Go To Users Page</h3>
+<div class="row justify-content-center">
+    <b><a href="/users" class="btn btn-primary">All Users</a></b>
+</div>
+<% end %>
+
+</body>
+</html>
