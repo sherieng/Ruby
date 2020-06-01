@@ -5,11 +5,9 @@ puts a.at(0)
 puts "***********"
 puts a.at(-1)
 puts "***********"
-puts a.delete("x")
+puts b.delete("b"), b
 puts "***********"
-puts a.delete(3)
-puts "***********"
-puts a
+puts a.delete(3), a
 puts "***********"
 puts a.reverse 
 puts "***********"
@@ -17,15 +15,13 @@ puts a.length
 puts "***********"
 puts b.sort
 puts "***********"
-puts b.slice!(2)
-puts "***********"
-puts b
+puts b.slice!(2), b
 puts "***********"
 puts a.shuffle!
 puts "***********"
 puts a.join
 puts "***********"
-puts b.insert(5,"f")
+puts b.insert(2,"f")
 puts "***********"
 puts b.values_at(2..3)
 
