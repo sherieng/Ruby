@@ -1,7 +1,7 @@
 class BankAccount 
 @@num_of_accounts=0  
 
-    attr_accessor :checking, :savings, :account_num
+    attr_reader :checking, :savings, :account_num
     
     private 
         def initialize
@@ -10,16 +10,20 @@ class BankAccount
             @account_num =0
             @interest_rate = 0.1
         end
-    
-    public 
+
         def generate_account
             @@num_of_accounts += 1
             @account_num = rand(99999999)
+            self
+        end
+    public
+        def account_info
+            generate_account
             puts "Your account number: #{@account_num}"
             puts "There are #{@@num_of_accounts} user accounts at the bank."
+            self
         end
-
-        public 
+    
         def checking_account
             puts "You have $#{@checking} in your checking account."
             self
@@ -30,9 +34,15 @@ class BankAccount
             self
         end
 
-        def deposit amt 
+        def deposit_checking amt 
             @checking += amt
             puts "You have added $#{amt} to your checking account. Your new balance is $#{@checking}."
+            self
+        end
+
+        def deposit_saving amt 
+            @savings += amt
+            puts "You have added $#{amt} to your savings account. Your new balance is $#{@savings}."
             self
         end
         
@@ -62,11 +72,14 @@ end
 
 
 user1 = BankAccount.new
-user1.generate_account
+user1.account_info
 user1.checking_account.savings_account.withdraw(10)
 user1.total_amt.account_information
+
 user2 = BankAccount.new
-user2.generate_account
-user2.deposit(220).account_information
+user2.account_info
+user2.deposit_checking(220).account_information.deposit_saving(100)
+# user2.checking = 200 
+user2.account_information
 
 
