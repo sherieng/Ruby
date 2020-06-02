@@ -9,8 +9,8 @@ class Samurai < Human
     end
 
     def death_blow(obj)
-        if obj.class.ancestors.include?(Samurai)
-            obj.health == 0
+        if obj.class.ancestors.include?(Human)
+            obj.health = 0
             puts "The samurai's health is #{@health}. The opponent's health is now #{obj.health}." 
             true
         else
