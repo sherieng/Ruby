@@ -1,0 +1,15 @@
+$ rails g model Comment comment:text commentable:references{polymorphic}
+$ rake db:migrate
+$ rails c
+2.3.1 :001 > Hirb.enable
+2.3.1 :002 > Comment.new
+2.3.1 :003 > Comment.create(comment:"hey", commentable: User.first)
+2.3.1 :004 > com = Comment.first
+2.3.1 :005 > com.update(comment:"hey")
+2.3.1 :006 > comment = Comment.create(comment:"whatup", commentable: Blog.first)
+2.3.1 :007 > comment = Comment.create(comment:"what it do?", commentable: Post.first)
+2.3.1 :008 > comment = Comment.create(comment:"hi", commentable: Message.first)
+2.3.1 :013 > Comment.create(comment:"hello", commentable: Message.first)
+2.3.1 :017 > com = Comment.last
+2.3.1 :018 > com.destroy
+2.1.1 :019 > Comment.first.commentable
