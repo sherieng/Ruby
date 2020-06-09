@@ -1,0 +1,36 @@
+<div class ="container mt-5 bottom-border p-0">
+    <h1 class = "bg-primary text-light p-3 mb-2" >New Dojo</h1>
+    <div class="col-10 mx-auto">
+        <% if flash[:error]%>
+            <% flash[:error].each do |error| %>
+            <span class="text-danger mx-auto"><%=error%></span>
+            <% if flash[:error].length > 1%>
+                <span class="text-danger">, </span>
+                <%end%>
+            <% end %>
+        <% end %>
+        <form action= '/dojos' method ='POST'>
+            <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+            <div class="form-row mt-2">
+                <label>Branch: </label>
+                <input type='text' class="form-control" name='dojo[branch]'>
+            </div>
+            <div class="form-row mt-2">
+                <label>Street: </label>
+                <input type='text' class="form-control" name='dojo[street]'>
+            </div>
+            <div class="form-row mt-2">
+                <label>City: </label>
+                <input type='text' class="form-control" name='dojo[city]'>
+            </div>
+            <div class="form-row mt-2">
+                <label>State: </label>
+                <input type='text' class="form-control" name='dojo[state]'>
+            </div>
+            <div class="form-row mt-3 py-2">
+                    <b class="col-11"><a href="/dojos">Go back</a></b>
+                    <input type="submit" value="Add" class="col-1 btn btn-primary">
+            </div> 
+        </form>
+    </div>
+</div>

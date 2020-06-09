@@ -1,0 +1,15 @@
+// Place all the styles related to the Rpg controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.boxes{
+    height: 250px;
+    width: 250px;
+    border: gold solid 1px;
+}
+
+.btm {
+    height: 200px;
+    max-width: 970px;
+    overflow-y: scroll;
+    border: gray 1px solid;
+}

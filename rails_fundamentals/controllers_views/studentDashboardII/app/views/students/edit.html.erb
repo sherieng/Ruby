@@ -1,0 +1,48 @@
+<div class ="container mt-5 p-0">
+    <h1 class = "bg-info text-light p-3 mb-2" >Edit a Student</h1>
+    <div class="col-10 mx-auto">
+        <% if flash[:error]%>
+            <% flash[:error].each do |error| %>
+            <span class="text-danger mx-auto"><%=error%></span>
+            <% if flash[:error].length > 1%>
+                <span class="text-danger">, </span>
+                <%end%>
+            <% end %>
+        <% end %>
+        <form action= '/dojos/<%=@student.dojo_id%>/students/<%=@student.id%>' method ='POST'>
+            <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+            <input type ="hidden" name="_method" value="put">
+            <div class="form-row mt-2">
+                <label>First Name: </label>
+                <input type='text' class="form-control" name='student[first_name]' value='<%=@student.first_name%>'>
+            </div>
+            <div class="form-row mt-2">
+                <label>Last Name: </label>
+                <input type='text' class="form-control" name='student[last_name]' value='<%=@student.last_name%>'>
+            </div>
+            <div class="form-row mt-2">
+                <label>Email: </label>
+                <input type='text' class="form-control" name='student[email]' value='<%=@student.email%>'>
+            </div>
+            <div class="form-row mt-2">
+                <label class="mr-2">Dojo: </label>
+                    <select name='student[dojo]' class="custom-select">
+                    <% @dojos.each do |dojo| %>
+                        <% if @dojo == dojo%>
+                        <option selected value="<%=dojo.id%>"><%=dojo.branch%></option>
+                        <%else%>
+                            <option value="<%=dojo.id%>"><%=dojo.branch%></option>
+                        <%end%>
+                    <%end%>
+                    </select>
+                
+            </div>
+            <div class="form-row mt-3 py-2">
+                    <b class="col-1"><a href="/dojos">Home</a></b>
+                    <b class="col-2"><a href="/dojos/<%=@student.dojo_id%>"><%=@dojo.branch%> Page</a></b>
+                    <b class="col-8"><a href="/dojos/<%=@student.dojo_id%>/students/<%=@student.id%>"><%=@student.first_name%>'s Page</a></b>
+                    <input type="submit" value="Submit" class="col-1 btn btn-primary">
+            </div> 
+        </form>
+    </div>
+</div>''

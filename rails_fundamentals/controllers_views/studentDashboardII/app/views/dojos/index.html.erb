@@ -1,0 +1,37 @@
+<div class ="container mt-5 bottom-border p-0">
+    <div class="row bg-primary no-gutters">
+        <h1 class = " text-light p-3 col-9" >Listing <%=@dojo.length %> Dojos</h1>
+        <a href="/dojos/new" class="d-flex col-3 text-light my-auto justify-content-end p-3">Create a New Dojo</a>
+    </div>
+    <% if flash[:notice]%>
+        <p class="text-warning my-3 mx-auto"><%=flash[:notice]%></p>
+    <% end %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Coding Dojo Branch</th>
+                <th scope="col">Street</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @dojo.each do |dojo|%>
+            <tr>
+                <td><%=dojo.branch%></td>
+                <td><%=dojo.street%></td>
+                <td><%=dojo.city%></td>
+                <td><%=dojo.state%></td>
+                <td class="row"><a href="/dojos/<%=dojo.id%>">Show |</a>
+                <a class="ml-1 p-0" href="/dojos/<%=dojo.id%>/edit"> Edit |</a>  
+                <form action= '/dojos/<%= dojo.id %>' method ='POST' class="p-0 mx-0" style="margin-top: -7px; marigin-left: -15px;">
+                    <input type ="hidden" name="_method" value="delete">
+                    <input type ="hidden" name ="authenticity_token" value ="<%=form_authenticity_token%>">
+                    <input type="submit" class="btn btn-link text-success" value="Delete">
+                </form></td>
+            </tr>
+            <%end%>
+        </tbody>
+    </table>
+</div>

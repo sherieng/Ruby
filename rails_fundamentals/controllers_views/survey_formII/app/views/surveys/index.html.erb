@@ -1,0 +1,55 @@
+<div class= "container border m-5"> 
+        <h1 class = "text-center m-5 bg-primary text-white p-3" >Survey Form</h1>
+        <div class="container">
+            <form action= '/' method ='POST'>
+                <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+                <%= csrf_meta_tags %>
+                <div class = "container">
+                    <div class= "col-10 mx-auto"> 
+                        <% if flash[:error]%>
+                            <% flash[:error].each do |error| %>
+                            <p class="text-danger mx-auto"><%=error%></p>
+                            <% end %>
+                        <% end %>
+                        <%# flash[:success]
+                        <%= flash[:error] %> 
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="name" class ="col-2">Name: </label>
+                        <div class="col-3">
+                            <input type='text' name='user[name]'>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label class ="col-2">Dojo Location: </label>
+                        <div class="col-3">
+                            <select name='user[location]'>
+                                <option value="Dallas">Dallas</option>
+                                <option value="Los Angeles">Los Angeles</option>
+                                <option value="Seattle">Seattle</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label class ="col-2">Favorite Language: </label>
+                        <div class="col-3">
+                            <select name='user[language]'>
+                                <option value="Javascript">Javascript</option>
+                                <option value="Python">Python</option>
+                                <option value="Ruby">Ruby</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center m-3">
+                        <label for="lang" class ="col-2">Comments: </label>
+                        <div class="col-3">
+                            <input type="text" name="user[comment]" rows="3">
+                        </div>
+                    </div>
+                    <div class="form-row mt-5 mb-5 d-flex justify-content-center">
+                        <input type="submit" value="Add" class="btn btn-primary mb-2">
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>

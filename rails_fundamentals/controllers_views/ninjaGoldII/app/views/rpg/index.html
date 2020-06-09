@@ -1,0 +1,68 @@
+<div class="container mt-3">
+    <div class="header row">
+    </div>       
+    <div class="row mx-auto display:block">
+        <div class= "row"><b>Your Gold: <%= session[:player_gold]%></b>
+        </div>
+        <div class= "row"> 
+            <div class="boxes col m-3">
+                <p><h3 class="text-center">Farm</h3></p>
+                <p><h4 class="text-muted text-center">(earns 10-20 golds)</h4></p>
+                <form action="/process" method="POST" class="col text-center">
+                    <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+                    <input type="hidden" name = "building" value= "farm">
+                    <input type="submit" value="Find Gold!"  class="btn btn-warning">
+                </form>
+            </div>
+
+            <div class="boxes col m-3">
+                <p><h3 class="text-center">Cave</h3></p>
+                <p><h4 class="text-muted text-center">(earns 5-10 golds)</h4></p>
+                <form action="/process" method="POST" class="col text-center">
+                    <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+                    <input type="hidden" name = "building" value= "cave"/>
+                    <input type="submit" value="Find Gold!"  class="btn btn-warning">
+                </form>
+            </div>
+            
+            <div class="boxes col m-3">
+                <p><h3 class="text-center">House</h3></p>
+                <p><h4 class="text-muted text-center">(earns 2-5 golds)</h4></p>
+                <form action="/process" method="POST" class="col text-center">
+                    <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+                    <input type="hidden" name = "building" value= "house"/>
+                    <input type="submit" value="Find Gold!"  class="btn btn-warning">
+                </form>
+            </div>
+
+            <div class="boxes col m-3">
+                <p><h3 class="text-center">Casino</h3></p>
+                <p><h4 class="text-muted text-center">(earns/takes 0-50 golds)</h4></p>
+                <form action="/process" method="POST" class="col text-center">
+                    <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+                    <input type="hidden" name = "building" value= "casino"/>
+                    <input type="submit" value="Find Gold!"  class="btn btn-warning mx-auto">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="reset row mb-5">
+        <form action="/reset" method="POST">
+            <input name = "authenticity_token" value = "<%= form_authenticity_token%>" type = "hidden">
+            <input type ="submit" name="reset" value="Reset"/>
+        </form>    
+    </div>
+    <p class ="ml-2">Activities:</p>
+    <div class= "btm p-1 mx-auto">
+        <% if session[:message] %>
+            <% session[:message].each do |msg|%>
+                <% if msg.include? "Earned"%>
+                <p class = "text-success ml-2 my-0"><%=msg%></p>
+                <% else %>
+                <p class = "text-danger ml-2 my-0"><%=msg%></p>
+                <%end%>
+            <%end%> 
+        <%end%>
+    </div>
+</div>

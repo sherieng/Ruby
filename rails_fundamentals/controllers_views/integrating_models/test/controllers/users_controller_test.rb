@@ -26,4 +26,9 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get total" do
+    get :total
+    assert_response :success
+  end
+
 end

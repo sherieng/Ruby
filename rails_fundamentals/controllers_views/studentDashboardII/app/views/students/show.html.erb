@@ -1,0 +1,33 @@
+<div class ="container mt-5 bottom-border p-0">
+    <h1 class = "bg-secondary text-light p-3"><%=@student.first_name%></h1>
+        <div class="row ml-5 mt-4">
+            <h6 class="ml-5">Email:</h6> 
+            <h6><%=@student.email%></h6>
+    </div>    
+    <h3 class = "bg-info text-light p-2 mt-5" ><%=@dojo.branch%> <%=@student.created_at.strftime("%Y-%m-%d")%> Cohort</h3>    
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @students.each do |student| %>
+                <% if student.created_at.strftime("%Y-%m-%d") == @student.created_at.strftime("%Y-%m-%d")%>
+                <tr>
+                    <td><%=student.first_name%></td>
+                    <td><%=student.last_name%></td>
+                    <td><%=student.email%></td>
+                </tr>
+                <%end%>
+            <%end%>
+        </tbody>
+    </table>
+    <div class="row justify-content-end mr-3 mt-4">
+        <b><a href="/dojos">Home</a></b>
+        <b class="ml-5"><a href="/dojos/<%=@student.dojo_id%>"><%=@dojo.branch%>'s Page</a></b>
+        <b class="ml-5"><a href="/dojos/<%=@student.dojo_id%>/students/<%=@student.id%>/edit">Edit</a></b>
+    </div>
+</div>
